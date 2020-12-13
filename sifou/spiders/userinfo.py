@@ -3,11 +3,12 @@ from scrapy import Spider,Request
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from sifou.items import SifouItem
-
-class UserinfoSpider(CrawlSpider):
+from scrapy_redis.spiders import RedisCrawlSpider
+class UserinfoSpider(RedisCrawlSpider):
     name = 'userinfo'
     allowed_domains = ['segmentfault.com']
-    start_urls = ['https://segmentfault.com/u/yujiaao']
+    #start_urls = ['https://segmentfault.com/u/yujiaao']
+    redis_key = 'userinfospider:start_urls'
 
     rules = (
          #用户主页

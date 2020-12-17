@@ -34,8 +34,6 @@ class SifouItem(scrapy.Item):
     questions = scrapy.Field()
     # 文章数
     articles = scrapy.Field()
-    # 讲座数
-    lives = scrapy.Field()
     # 徽章数
     badges = scrapy.Field()
     # 技能属性
@@ -50,9 +48,3 @@ class SifouItem(scrapy.Item):
     answers_top_score = scrapy.Field()
     # 得票数最高的回答对应的问题的标题
     answers_top_title = scrapy.Field()
-    # 得票数最高的回答对应的问题的标签
-    answers_top_tags = scrapy.Field()
-    # 得票数最高的回答对应的问题的内容
-    answers_top_question = scrapy.Field()
-    # 得票数最高的回答对应的问题的内容
-    answers_top_content = scrapy.Field()

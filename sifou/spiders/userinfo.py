@@ -86,8 +86,6 @@ class UserinfoSpider(RedisCrawlSpider):
         item['questions'] = profile_active.css('a[href*=questions] .count::text').re_first(r'\d+')
         # 文章数
         item['articles'] = profile_active.css('a[href*=articles] .count::text').re_first(r'\d+')
-        # 讲座数
-        item['lives'] = profile_active.css('a[href*=lives] .count::text').re_first(r'\d+')
         # 徽章数
         item['badges'] = profile_active.css('a[href*=badges] .count::text').re_first(r'\d+')
         # 徽章详细页面地址
@@ -131,17 +129,6 @@ class UserinfoSpider(RedisCrawlSpider):
         item = response.meta['item']
         # 取出传递的徽章详细页url
         badge_url = response.meta['badge_url']
-        # 问题标签列表
-        item['answers_top_tags'] = response.css('.question__title--tag .tag::text').re(r'\w+')
-        # 先获取组成问题内容的字符串列表
-        question_content = response.css('.widget-question__item p').re(r'>(.*?)<')
-        # 拼接后传入item
-        item['answers_top_question'] = ''.join(question_content)
-        # 先获取组成答案的字符串列表
-        answer_content = response.css('.qa-answer > article .answer').re(r'>(.*?)<')
-        # 拼接后传入item
-        item['answers_top_content'] = ''.join(answer_content)
-
         # 问题页面内容抓取后继续抓取徽章页内容，并将更新后的item继续传递
         request = scrapy.Request(url=badge_url,
                                  meta={'item':item},
